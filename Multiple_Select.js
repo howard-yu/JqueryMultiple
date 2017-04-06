@@ -18,14 +18,18 @@ var Multiple_Select = (function () {
 
 function Multiple() {
   this.setJson = []; 
+  this.contentid = "";
 }
 
+Multiple.prototype.setContentId = function(id) {
+  this.contentid = id;
+}
 Multiple.prototype.SetJson = function(setJson) {
   this.setJson = setJson;
 }
 
 Multiple.prototype.CreateMultipleSelectTable = function() {
-  var jasonResult =  this.setJson == null ? "" : this.setJson;
+  //var jasonResult =  this.setJson == null ? "" : this.setJson;
 
   var table = $('<table></table>').addClass('newContTab').attr({
     width: '500',
@@ -42,6 +46,12 @@ Multiple.prototype.CreateMultipleSelectTable = function() {
     style: 'float:left'
   });
   var cthirdDiv = $('<div></div>');
+  var cfourthDiv = $('<div></div>').attr({
+    style: 'width:150px;height:200px; float:left;'
+  });
+  var cfifthDiv = $('<div></div>').attr({
+    style: 'float:left'
+  });
   var select = $('<select></select>').attr({
     multiple: 'multiple',
     id: 'select1',
@@ -67,6 +77,9 @@ Multiple.prototype.CreateMultipleSelectTable = function() {
   var spanRemove = $('<span></span>').attr({
     id: 'remove'
   });
+  var spanSubmit = $('<span></span>').attr({
+    id: 'Submit'
+  });
 
   var btnAddAll = $('<input />').attr({
     type: 'button',
@@ -88,19 +101,34 @@ Multiple.prototype.CreateMultipleSelectTable = function() {
     class: 'btn',
     value: 'Remove'
   });
+  var btnSubmit = $('<input />').attr({
+    id: 'btnSubmit',
+    type: 'button',
+    class: 'btn',
+    value: 'Submit'
+  });
 
   spanAddAll.after('<br />');
   spanAdd.after('<br />');
   spanRemove.after('<br />');
 
-  table.append(tr.append(td.append(div.append(cfirstDiv.append(select)).append(cSecondDiv.append(spanAddAll.append(btnAddAll)).append(spanAdd.append(btnAdd)).append(spanRemove.append(btnRemove)).append(spanRemoveAll.append(btnRemoveAll))).append(cthirdDiv.append(select2)))));
+  table.append(tr.append(td.append(div.append(cfirstDiv.append(select)).append(cSecondDiv.append(spanAddAll.append(btnAddAll)).append(spanAdd.append(btnAdd)).append(spanRemove.append(btnRemove)).append(spanRemoveAll.append(btnRemoveAll))).append(cthirdDiv.append(select2)).append(cfourthDiv).append(cfifthDiv.append(spanSubmit.append(btnSubmit))))));
 
   $('#appenHtml').append(table);
 
   $('#select1').empty();
   //$('#select1').append($('<option>').text("Select"));
+  //$.each(jasonResult, function(i, obj){
+    //$('#select1').append($('<option>').text(obj.text).attr('value', obj.val));
+  //});
+
+  var jasonResult =  this.setJson == null ? "" : this.setJson;
   $.each(jasonResult, function(i, obj){
-    $('#select1').append($('<option>').text(obj.text).attr('value', obj.val));
+    if(obj.text=='undefined'){
+      $('#select1').append($('<option>').text(obj.text).attr('value', obj.val));
+    }else{
+      $('#select1').append($('<option>').text(obj).attr('value', obj));
+    }
   });
 
  //移到右邊
@@ -129,5 +157,17 @@ Multiple.prototype.CreateMultipleSelectTable = function() {
   //雙擊選項
   $('#select2').dblclick(function(){
      $("option:selected",this).appendTo('#select1');
+  });
+  //回傳選則後JSON格式
+  var optionValue = [];
+  var id = this.contentid;
+  $("#btnSubmit").click(function(){
+    $('#select2 option').each(function(){
+        //optionValue.push({text:$(this).text(), val: $(this).val()});
+        optionValue.push({text:$(this).text(), val: $(this).val()});
+    });
+    var JsonString = JSON.stringify(optionValue);
+    $('#' + id).html(JsonString);
+    //alert(JsonString);
   });
 }

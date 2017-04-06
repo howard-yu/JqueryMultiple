@@ -16,9 +16,12 @@
   //var json = [{text:"Text2", val:"Value2"},{text:"Text3", val:"Value3"},{text:"Text4", val:"Value4"}];
   //InitMultipleTable(json);
 $(function(){
-  var json = [{text:"Text1", val:"Value1"},{text:"Text2", val:"Value2"},{text:"Text3", val:"Value3"}];
-  var Multiple = Multiple_Select.getInstance(); 
+  //var json = [{text:"Text1", val:"Value1"},{text:"Text2", val:"Value2"},{text:"Text3", val:"Value3"}];
+  var json = ["Text1","Text2","Text3"];
+  var Multiple = Multiple_Select.getInstance();
+  //Multiple.CreateMultipleSelectTable(); 
   Multiple.SetJson(json);
+  Multiple.setContentId('qqq');
   Multiple.CreateMultipleSelectTable();
 });
 
@@ -28,6 +31,7 @@ $(function(){
 <body>
 <br />
 <br />
+<div id="qqq"></div>
 <div id="appenHtml"></div>
 </table>
 </body>
