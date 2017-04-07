@@ -33,43 +33,67 @@ Multiple.prototype.createMultipleSelectTable = function() {
 	var table = $('<table></table>').addClass('newContTab').attr({
 		width: '500',
 		align: 'center',
-		border: '0',
+		border: '1',
 		cellpadding: '0',
 		cellspacing: '0'
 	});
-	var tr = $('<tr></tr>').append('<th>&nbsp;</th>');
-	var td = $('<td></td>');
-	var div = $('<div></div>');
-	var chirdlenFirstDiv = $('<div></div>');
-	var chirdlenSecondDiv = $('<div></div>').attr({
-		style: 'float:left'
+
+    var firstFloorTr = $('<tr></tr>');
+    var secondFloorTr = $('<tr></tr>');
+    var thirdFloorTr = $('<tr></tr>');
+
+	var firstFloorTd1 = $('<td></td>').attr({
+		id: 'firstFloor-td-1',
+		align: 'center',
+		width: '150'
 	});
-	var chirdlenThirdDiv = $('<div></div>');
-	var chirdlenFourthDiv = $('<div></div>').attr({
-		style: 'width:150px;height:200px; float:left;'
+	var firstFloorTd2 = $('<td></td>').attr({
+		id: 'firstFloor-td-2',
+		align: 'center',
+		width: '200'
 	});
-	var chirdlenFifthDiv = $('<div></div>').attr({
-		style: 'float:left'
+	var firstFloorTd3 = $('<td></td>').attr({
+		id: 'firstFloor-td-3',
+		align: 'center',
+		width: '150'
 	});
+    firstFloorTd1.html('Unselect');
+    firstFloorTd3.html('Select');
+
+    var secondFloorTd1 = $('<td></td>').attr({
+		align: 'center',
+		width: '150'
+	});
+	var secondFloorTd2 = $('<td></td>').attr({
+		align: 'center',
+		width: '200'
+	});
+	var secondFloorTd3 = $('<td></td>').attr({
+		align: 'center',
+		width: '150'
+	});
+
+	var thirdFloorTd1 = $('<td></td>').attr({
+		align: 'center',
+		colspan: '3',
+		rowspan: '3'
+	});
+
 	var select = $('<select></select>').attr({
 		multiple: 'multiple',
-		id: 'select1',
-		style: 'width:150px;height:200px; float:left; border:4px #A0A0A4 outset; padding:4px;'
+		id: 'select1'
 	});
 	var select2 = $('<select></select>').attr({
 		multiple: 'multiple',
-		id: 'select2',
-		style: 'width:150px;height:200px; float:left; border:4px #A0A0A4 outset; padding:4px;'
+		id: 'select2'
 	});
 
 	var spanAddAll = $('<span></span>').attr({
 		id: 'add_all'
 	});
-
 	var spanAdd = $('<span></span>').attr({
 		id: 'add'
 	});
-
 	var spanRemoveAll = $('<span></span>').attr({
 		id: 'remove_all'
 	});
@@ -79,6 +103,9 @@ Multiple.prototype.createMultipleSelectTable = function() {
 	var spanSubmit = $('<span></span>').attr({
 		id: 'Submit'
 	});
+	spanAddAll.after('<br />');
+	spanAdd.after('<br />');
+	spanRemove.after('<br />');
 
 	var btnAddAll = $('<input />').attr({
 		type: 'button',
@@ -107,11 +134,7 @@ Multiple.prototype.createMultipleSelectTable = function() {
 		value: 'Submit'
 	});
 
-	spanAddAll.after('<br />');
-	spanAdd.after('<br />');
-	spanRemove.after('<br />');
-
-	table.append(tr.append(td.append(div.append(chirdlenFirstDiv.append(select)).append(chirdlenSecondDiv.append(spanAddAll.append(btnAddAll)).append(spanAdd.append(btnAdd)).append(spanRemove.append(btnRemove)).append(spanRemoveAll.append(btnRemoveAll))).append(chirdlenThirdDiv.append(select2)).append(chirdlenFourthDiv).append(chirdlenFifthDiv.append(spanSubmit.append(btnSubmit))))));
+	table.append(firstFloorTr.append(firstFloorTd1).append(firstFloorTd2).append(firstFloorTd3)).append(secondFloorTr.append(secondFloorTd1.append(select)).append(secondFloorTd2.append(spanAddAll.append(btnAddAll)).append(spanAdd.append(btnAdd)).append(spanRemove.append(btnRemove)).append(spanRemoveAll.append(btnRemoveAll))).append(secondFloorTd3.append(select2))).append(thirdFloorTr.append(thirdFloorTd1.append(spanSubmit.append(btnSubmit))));
 
 	$('#appenHtml').append(table);
 

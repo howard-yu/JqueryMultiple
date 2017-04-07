@@ -13,6 +13,7 @@ function InitMultipleTable(json)
     cellpadding: '0',
     cellspacing: '0'
   });
+  
   var tr = $('<tr></tr>').append('<th>&nbsp;</th>');
   var td = $('<td></td>');
   var div = $('<div></div>');
@@ -21,6 +22,7 @@ function InitMultipleTable(json)
     style: 'float:left'
   });
   var cthirdDiv = $('<div></div>');
+
   var select = $('<select></select>').attr({
     multiple: 'multiple',
     id: 'select1',
@@ -31,21 +33,22 @@ function InitMultipleTable(json)
     id: 'select2',
     style: 'width:150px;height:200px; float:left; border:4px #A0A0A4 outset; padding:4px;'
   });
-
   var spanAddAll = $('<span></span>').attr({
     id: 'add_all'
   });
-
   var spanAdd = $('<span></span>').attr({
     id: 'add'
   });
-
   var spanRemoveAll = $('<span></span>').attr({
     id: 'remove_all'
   });
   var spanRemove = $('<span></span>').attr({
     id: 'remove'
   });
+
+  spanAddAll.after('<br />');
+  spanAdd.after('<br />');
+  spanRemove.after('<br />');
 
   var btnAddAll = $('<input />').attr({
     type: 'button',
@@ -68,9 +71,6 @@ function InitMultipleTable(json)
     value: 'Remove'
   });
 
-  spanAddAll.after('<br />');
-  spanAdd.after('<br />');
-  spanRemove.after('<br />');
 
   table.append(tr.append(td.append(div.append(cfirstDiv.append(select)).append(cSecondDiv.append(spanAddAll.append(btnAddAll)).append(spanAdd.append(btnAdd)).append(spanRemove.append(btnRemove)).append(spanRemoveAll.append(btnRemoveAll))).append(cthirdDiv.append(select2)))));
 
