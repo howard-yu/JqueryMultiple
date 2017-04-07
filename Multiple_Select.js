@@ -29,7 +29,6 @@ Multiple.prototype.SetJson = function(setJson) {
 }
 
 Multiple.prototype.CreateMultipleSelectTable = function() {
-  //var jasonResult =  this.setJson == null ? "" : this.setJson;
 
   var table = $('<table></table>').addClass('newContTab').attr({
     width: '500',
@@ -117,10 +116,6 @@ Multiple.prototype.CreateMultipleSelectTable = function() {
   $('#appenHtml').append(table);
 
   $('#select1').empty();
-  //$('#select1').append($('<option>').text("Select"));
-  //$.each(jasonResult, function(i, obj){
-    //$('#select1').append($('<option>').text(obj.text).attr('value', obj.val));
-  //});
 
   var jasonResult =  this.setJson == null ? "" : this.setJson;
   $.each(jasonResult, function(i, obj){
@@ -163,11 +158,9 @@ Multiple.prototype.CreateMultipleSelectTable = function() {
   var id = this.contentid;
   $("#btnSubmit").click(function(){
     $('#select2 option').each(function(){
-        //optionValue.push({text:$(this).text(), val: $(this).val()});
         optionValue.push({text:$(this).text(), val: $(this).val()});
     });
     var JsonString = JSON.stringify(optionValue);
     $('#' + id).html(JsonString);
-    //alert(JsonString);
   });
 }
