@@ -43,17 +43,14 @@ Multiple.prototype.createMultipleSelectTable = function() {
     var thirdFloorTr = $('<tr></tr>');
 
 	var firstFloorTd1 = $('<td></td>').attr({
-		id: 'firstFloor-td-1',
 		align: 'center',
 		width: '150'
 	});
 	var firstFloorTd2 = $('<td></td>').attr({
-		id: 'firstFloor-td-2',
 		align: 'center',
 		width: '200'
 	});
 	var firstFloorTd3 = $('<td></td>').attr({
-		id: 'firstFloor-td-3',
 		align: 'center',
 		width: '150'
 	});
@@ -79,7 +76,7 @@ Multiple.prototype.createMultipleSelectTable = function() {
 		rowspan: '3'
 	});
 
-	var select = $('<select></select>').attr({
+	var select1 = $('<select></select>').attr({
 		multiple: 'multiple',
 		id: 'select1'
 	});
@@ -134,7 +131,7 @@ Multiple.prototype.createMultipleSelectTable = function() {
 		value: 'Submit'
 	});
 
-	table.append(firstFloorTr.append(firstFloorTd1).append(firstFloorTd2).append(firstFloorTd3)).append(secondFloorTr.append(secondFloorTd1.append(select)).append(secondFloorTd2.append(spanAddAll.append(btnAddAll)).append(spanAdd.append(btnAdd)).append(spanRemove.append(btnRemove)).append(spanRemoveAll.append(btnRemoveAll))).append(secondFloorTd3.append(select2))).append(thirdFloorTr.append(thirdFloorTd1.append(spanSubmit.append(btnSubmit))));
+	table.append(firstFloorTr.append(firstFloorTd1).append(firstFloorTd2).append(firstFloorTd3)).append(secondFloorTr.append(secondFloorTd1.append(select1)).append(secondFloorTd2.append(spanAddAll.append(btnAddAll)).append(spanAdd.append(btnAdd)).append(spanRemove.append(btnRemove)).append(spanRemoveAll.append(btnRemoveAll))).append(secondFloorTd3.append(select2))).append(thirdFloorTr.append(thirdFloorTd1.append(spanSubmit.append(btnSubmit))));
 
 	$('#appenHtml').append(table);
 
