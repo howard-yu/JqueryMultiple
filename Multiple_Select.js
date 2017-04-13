@@ -2,23 +2,22 @@ var Multiple_Select = (function () {
 	var instance;
 
 	function createInstance() {
-			var object = new Multiple();
-			return object;
+		var object = new Multiple();
+		return object;
 	}
 
 	return {
-			getInstance: function () {
-					if (!instance) {
-							instance = createInstance();
-					}
-					return instance;
-			}      
+		getInstance: function () {
+				if (!instance) {
+						instance = createInstance();
+				}
+				return instance;
+		}      
 	};
 })();
 
 function Multiple() {
 	this.setJson = []; 
-	this.contentid = "";
 }
 
 Multiple.prototype.setContentId = function(id) {
@@ -28,9 +27,10 @@ Multiple.prototype.setOptionJson = function(setJson) {
 	this.setJson = setJson;
 }
 
-Multiple.prototype.createMultipleSelectTable = function() {
 
-	var table = $('<table></table>').addClass('newContTab').attr({
+Multiple.prototype.createMultipleSelectTable = function(objSubmit,objCencel) {
+
+	var table = $('<table></table>').addClass('table').attr({
 		width: '500',
 		align: 'center',
 		border: '1',
@@ -38,19 +38,19 @@ Multiple.prototype.createMultipleSelectTable = function() {
 		cellspacing: '0'
 	});
 
-    var firstFloorTr = $('<tr></tr>');
+	var firstFloorTr = $('<tr></tr>');
     var secondFloorTr = $('<tr></tr>');
     var thirdFloorTr = $('<tr></tr>');
 
-	var firstFloorTd1 = $('<td></td>').attr({
+	var firstFloorTd1 = $('<th></th>').attr({
 		align: 'center',
 		width: '150'
 	});
-	var firstFloorTd2 = $('<td></td>').attr({
+	var firstFloorTd2 = $('<th></th>').attr({
 		align: 'center',
 		width: '200'
 	});
-	var firstFloorTd3 = $('<td></td>').attr({
+	var firstFloorTd3 = $('<th></th>').attr({
 		align: 'center',
 		width: '150'
 	});
@@ -71,16 +71,18 @@ Multiple.prototype.createMultipleSelectTable = function() {
 	});
 
 	var thirdFloorTd1 = $('<td></td>').attr({
-		align: 'center',
+	    style:'text-align:center',
 		colspan: '3',
 		rowspan: '3'
 	});
 
 	var select1 = $('<select></select>').attr({
+	    class: 'form-control',
 		multiple: 'multiple',
 		id: 'select1'
 	});
 	var select2 = $('<select></select>').attr({
+	    class: 'form-control',
 		multiple: 'multiple',
 		id: 'select2'
 	});
@@ -98,7 +100,12 @@ Multiple.prototype.createMultipleSelectTable = function() {
 		id: 'remove'
 	});
 	var spanSubmit = $('<span></span>').attr({
+	    style:'float:initial',
 		id: 'Submit'
+	});
+	var spanCancel = $('<span></span>').attr({
+	    class: 'text-center',
+		id: 'Cancel'
 	});
 	spanAddAll.after('<br />');
 	spanAdd.after('<br />');
@@ -106,43 +113,50 @@ Multiple.prototype.createMultipleSelectTable = function() {
 
 	var btnAddAll = $('<input />').attr({
 		type: 'button',
-		class: 'btn',
+		class: 'btn btn-default center-block btn-md func-button',
 		value: '>>'
 	});
 	var btnAdd = $('<input />').attr({
 		type: 'button',
-		class: 'btn',
+		class: 'btn btn-default center-block btn-md func-button',
 		value: '>'
 	});
 	var btnRemoveAll = $('<input />').attr({
 		type: 'button',
-		class: 'btn',
+		class: 'btn btn-default center-block btn-md func-button',
 		value: '<<'
 	});
 	var btnRemove = $('<input />').attr({
 		type: 'button',
-		class: 'btn',
+		class: 'btn btn-default center-block btn-md func-button',
 		value: '<'
 	});
 	var btnSubmit = $('<input />').attr({
 		id: 'btnSubmit',
 		type: 'button',
-		class: 'btn',
+		class: 'btn btn-default btn-md func-button',
 		value: 'Submit'
 	});
+	var btnCancel = $('<input />').attr({
+		id: 'btnCancel',
+		type: 'button',
+		class: 'btn btn-default btn-md func-button',
+		value: 'Cancel',
+		'data-dismiss': 'modal'
+	});
 
-	table.append(firstFloorTr.append(firstFloorTd1).append(firstFloorTd2).append(firstFloorTd3)).append(secondFloorTr.append(secondFloorTd1.append(select1)).append(secondFloorTd2.append(spanAddAll.append(btnAddAll)).append(spanAdd.append(btnAdd)).append(spanRemove.append(btnRemove)).append(spanRemoveAll.append(btnRemoveAll))).append(secondFloorTd3.append(select2))).append(thirdFloorTr.append(thirdFloorTd1.append(spanSubmit.append(btnSubmit))));
+	table.append(firstFloorTr.append(firstFloorTd1).append(firstFloorTd2).append(firstFloorTd3)).append(secondFloorTr.append(secondFloorTd1.append(select1)).append(secondFloorTd2.append(spanAddAll.append(btnAddAll)).append(spanAdd.append(btnAdd)).append(spanRemove.append(btnRemove)).append(spanRemoveAll.append(btnRemoveAll))).append(secondFloorTd3.append(select2))).append(thirdFloorTr.append(thirdFloorTd1.append(spanSubmit.append(btnSubmit)).append(spanCancel.append(btnCancel))));
 
 	$('#appenHtml').append(table);
 
 	$('#select1').empty();
 
 	var jasonResult =  this.setJson == null ? "" : this.setJson;
-	$.each(jasonResult, function(index, object){
-		if(object.text=='undefined'){
-			$('#select1').append($('<option>').text(object.text).attr('value', object.val));
+	$.each(jasonResult, function (index, object) {
+	    if (typeof (object.text) == 'undefined') {
+	        $('#select1').append($('<option>').text(object).attr('value', object));
 		}else{
-			$('#select1').append($('<option>').text(object).attr('value', object));
+	        $('#select1').append($('<option>').text(object.text).attr('value', object.val));
 		}
 	});
 
@@ -173,14 +187,15 @@ Multiple.prototype.createMultipleSelectTable = function() {
 	$('#select2').dblclick(function(){
 		 $("option:selected",this).appendTo('#select1');
 	});
-	//回傳選則後JSON格式
-	var optionValue = [];
-	var id = this.contentid;
-	$("#btnSubmit").click(function(){
+	$("#btnSubmit").click(function () {
+	    var optionValue = [];
 		$('#select2 option').each(function(){
 				optionValue.push({text:$(this).text(), val: $(this).val()});
 		});
-		var jsonString = JSON.stringify(optionValue);
-		$('#' + id).html(jsonString);
+		return objSubmit(optionValue);
+	});
+	$('#btnCancel').click(function () {
+	    return objCencel(true);
 	});
 }
+
